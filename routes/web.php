@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\ForgotPasswordController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ProfileController;
+use App\Http\Controllers\Backend\lockScreenController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 /*
@@ -72,23 +73,24 @@ Route::group(['prefix' => 'admin', 'middleware' => 'guest', 'namespace' => 'Admi
 });
 
 // ================================== After Login =====================================================
-Route::get('/admin/lock', [AuthController::class, 'lockscreen'])->name('admin.lock');
+// ---------------------------LockScreenController----------------------------------------------------
+Route::get('/admin/lock', [lockScreenController::class, 'lockscreen'])->name('admin.lock');
+Route::get('/admin/lockUpdate', [lockScreenController::class, 'lockUpdate'])->name('admin.lock.update');
+Route::post('/admin/unlock', [lockScreenController::class, 'unlockscreen'])->name('admin.unlock');
 
 Route::group(['prefix' => 'admin', 'middleware' => ['isAdmin', 'screenLock'], 'namespace' => 'Admin', 'as' => 'admin.'], function () {
-    // Route::group(['middleware' => 'screenLock'], function () {
-    // ---------------------------DashboardController----------------------------------------------------
 
+    // ---------------------------DashboardController----------------------------------------------------
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
     Route::get('/logout', [DashboardController::class, 'logout'])->name('logout');
 
-    // ---------------------------DashboardController----------------------------------------------------
-
+    // ---------------------------ProfileController----------------------------------------------------
     Route::get('/editProfile', [ProfileController::class, 'editProfile'])->name('profile.edit');
     Route::post('/profile/update/{id}', [ProfileController::class, 'updateProfile'])->name('profile.update');
     Route::post('/profile/passwordUpdate/{id}', [ProfileController::class, 'updatePass'])->name('profile.updatePass');
 
-    // --------------------------- ProductController ----------------------------------------------------
 
+    // --------------------------- ProductController ----------------------------------------------------
     Route::get('/product', [ProductController::class, 'index'])->name('product.index');
     Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
     Route::post('/product/store', [ProductController::class, 'store'])->name('product.store');
@@ -97,7 +99,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['isAdmin', 'screenLock'], 'n
     Route::get('/product/delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
 
     // --------------------------- CategoryController ----------------------------------------------------
-
     Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
     Route::get('/category/create', [CategoryController::class, 'create'])->name('category.create');
     Route::post('/category/store', [CategoryController::class, 'store'])->name('category.store');
@@ -107,7 +108,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['isAdmin', 'screenLock'], 'n
     Route::get('/category/delete/{id}', [CategoryController::class, 'delete'])->name('category.delete');
 
     // --------------------------- BrandController ----------------------------------------------------
-
     Route::get('/brand', [BrandController::class, 'index'])->name('brand.index');
     Route::get('/brand/create', [BrandController::class, 'create'])->name('brand.create');
     Route::post('/brand/store', [BrandController::class, 'store'])->name('brand.store');
@@ -115,4 +115,3 @@ Route::group(['prefix' => 'admin', 'middleware' => ['isAdmin', 'screenLock'], 'n
     Route::post('/brand/update/{id}', [BrandController::class, 'update'])->name('brand.update');
     Route::get('/brand/delete/{id}', [BrandController::class, 'delete'])->name('brand.delete');
 });
-// });

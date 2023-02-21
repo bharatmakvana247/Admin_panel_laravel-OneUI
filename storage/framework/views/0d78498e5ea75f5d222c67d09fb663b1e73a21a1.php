@@ -1,11 +1,10 @@
-@extends('backend.layouts.authMaster')
-@section('authContent')
+<?php $__env->startSection('authContent'); ?>
     <div class="bg-image" style="background-image: url('assets/media/photos/photo28@2x.jpg');">
         <div class="row g-0 bg-primary-dark-op">
             <div class="hero-static col-lg-4 d-none d-lg-flex flex-column justify-content-center">
                 <div class="p-4 p-xl-5 flex-grow-1 d-flex align-items-center">
                     <div class="w-100">
-                        <a class="link-fx fw-semibold fs-2 text-white" href="{{ route('admin.login') }}">
+                        <a class="link-fx fw-semibold fs-2 text-white" href="<?php echo e(route('admin.login')); ?>">
                             One<span class="fw-normal">UI</span>
                         </a>
                         <p class="text-white-75 me-xl-8 mt-2">
@@ -33,7 +32,7 @@
             </div>
             <div class="hero-static col-lg-8 d-flex flex-column align-items-center bg-body-extra-light">
                 <div class="p-3 w-100 d-lg-none text-center">
-                    <a class="link-fx fw-semibold fs-3 text-dark" href="{{ route('admin.login') }}">
+                    <a class="link-fx fw-semibold fs-3 text-dark" href="<?php echo e(route('admin.login')); ?>">
                         One<span class="fw-normal">UI</span>
                     </a>
                 </div>
@@ -47,33 +46,35 @@
                                 Sign In
                             </h1>
                             <p class="fw-medium text-muted">
-                                Welcome, please login or <a href="{{ route('admin.register') }}">sign up</a> for a new
+                                Welcome, please login or <a href="<?php echo e(route('admin.register')); ?>">sign up</a> for a new
                                 account.
                             </p>
                         </div>
                         <div class="row g-0 justify-content-center">
                             <div class="col-sm-8 col-xl-4">
-                                <form class="js-validation-signin" action="{{ route('admin.login.store') }}" method="POST">
-                                    @csrf
+                                <form class="js-validation-signin" action="<?php echo e(route('admin.login.store')); ?>" method="POST">
+                                    <?php echo csrf_field(); ?>
                                     <div class="mb-4">
                                         <input id="signup-email" type="email"
-                                            class="form-control form-control-lg form-control-alt py-3{{ $errors->has('email') ? ' is-invalid' : '' }}"
+                                            class="form-control form-control-lg form-control-alt py-3<?php echo e($errors->has('email') ? ' is-invalid' : ''); ?>"
                                             name="email" value="" required autocomplete="off" placeholder="Email"
                                             autofocus>
-                                        @if ($errors->has('email'))
-                                            <div class="alert-info text-primary">{{ $errors->first('email') }}
+                                        <?php if($errors->has('email')): ?>
+                                            <div class="alert-info text-primary"><?php echo e($errors->first('email')); ?>
+
                                             </div>
-                                        @endif
+                                        <?php endif; ?>
                                     </div>
                                     <div class="mb-4">
                                         <input type="password"
-                                            class="form-control form-control-lg form-control-alt py-3{{ $errors->has('password') ? ' is-invalid' : '' }}"
+                                            class="form-control form-control-lg form-control-alt py-3<?php echo e($errors->has('password') ? ' is-invalid' : ''); ?>"
                                             value="" required="" id="signup-password" placeholder="Password"
                                             name="password" autocomplete="off">
-                                        @if ($errors->has('password'))
-                                            <div class="alert-info text-primary">{{ $errors->first('password') }}
+                                        <?php if($errors->has('password')): ?>
+                                            <div class="alert-info text-primary"><?php echo e($errors->first('password')); ?>
+
                                             </div>
-                                        @endif
+                                        <?php endif; ?>
                                     </div>
                                     <div class="mb-4">
                                         <div class="form-check">
@@ -82,55 +83,32 @@
                                             <label class="form-check-label" for="login-remember">Remember Me</label>
                                         </div>
                                     </div>
-                                    {{-- <div class="row mb-2"
-                                        style="overflow: hidden; display: flex;
-                                        justify-content:space-around;">
-                                        <div class="col-xl-2">
-                                            <a class="btn w-100 btn-alt-danger text-start" href="javascript:void(0)">
-                                                <i class="fab fa-fw fa-google opacity-50 me-1"></i>
-                                            </a>
-                                        </div>
-                                        <div class="col-xl-2">
-                                            <a class="btn w-100 btn-alt-info text-start" href="javascript:void(0)">
-                                                <i class="fab fa-fw fa-facebook opacity-50 me-1"></i>
-                                            </a>
-                                        </div>
-                                        <div class="col-xl-2">
-                                            <a class="btn w-100 btn-alt-secondary text-start" href="javascript:void(0)">
-                                                <i class="fab fa-fw fa-github opacity-50 me-1"></i>
-                                            </a>
-                                        </div>
-                                        <div class="col-xl-2">
-                                            <a class="btn w-100 btn-alt-success text-start" href="javascript:void(0)">
-                                                <i class="fab fa-fw fa-linkedin opacity-50 me-1"></i>
-                                            </a>
-                                        </div>
-                                    </div> --}}
+                                    
 
                                     <div style="overflow: hidden; display: flex; justify-content:space-around;">
-                                        <a href="{{ route('admin.authorized.google') }}"> <img src="{!! url('storage/socialite/google.png') !!}"
+                                        <a href="<?php echo e(route('admin.authorized.google')); ?>"> <img src="<?php echo url('storage/socialite/google.png'); ?>"
                                                 alt="Google" class="img-circle"
                                                 style="height:25px;width:25px;border-radius:50px"></a>
 
-                                        <a href="{{ route('admin.authorized.facebook') }}"> <img
-                                                src="{!! url('storage/socialite/facebook.png') !!}" alt="Facebook" class="img-circle"
+                                        <a href="<?php echo e(route('admin.authorized.facebook')); ?>"> <img
+                                                src="<?php echo url('storage/socialite/facebook.png'); ?>" alt="Facebook" class="img-circle"
                                                 style="height:25px;width:25px;border-radius:50px"></a>
 
-                                        <a href="{{ route('admin.authorized.github') }}"> <img
-                                                src="{!! url('storage/socialite/github.png') !!}" alt="Github" class="img-circle"
+                                        <a href="<?php echo e(route('admin.authorized.github')); ?>"> <img
+                                                src="<?php echo url('storage/socialite/github.png'); ?>" alt="Github" class="img-circle"
                                                 style="height:25px;width:25px;border-radius:50px"></a>
 
-                                        <a href="{{ route('admin.authorized.linkedin') }}"> <img
-                                                src="{!! url('storage/socialite/linked.png') !!}" alt="linkedin" class="img-circle"
+                                        <a href="<?php echo e(route('admin.authorized.linkedin')); ?>"> <img
+                                                src="<?php echo url('storage/socialite/linked.png'); ?>" alt="linkedin" class="img-circle"
                                                 style="height:25px;width:25px;border-radius:50px"></a>
-                                        <a href=""> <img src="{!! url('storage/socialite/insta.png') !!}" alt="Facebook"
+                                        <a href=""> <img src="<?php echo url('storage/socialite/insta.png'); ?>" alt="Facebook"
                                                 class="img-circle" style="height:25px;width:25px;border-radius:50px"></a>
                                     </div>
                                     <br>
                                     <div class="d-flex justify-content-between align-items-center mb-4">
                                         <div>
                                             <a class="text-muted fs-sm fw-medium d-block d-lg-inline-block mb-1"
-                                                href="{{ route('admin.forgetPassword.get') }}">
+                                                href="<?php echo e(route('admin.forgetPassword.get')); ?>">
                                                 Forgot Password?
                                             </a>
                                         </div>
@@ -165,8 +143,10 @@
             </div>
         </div>
     </div>
-@endsection
-@section('styles')
-@endsection
-@section('scripts')
-@endsection
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('styles'); ?>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('scripts'); ?>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('backend.layouts.authMaster', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\LaravelPanel\resources\views/backend/pages/auth/login.blade.php ENDPATH**/ ?>

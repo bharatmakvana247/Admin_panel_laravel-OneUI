@@ -44,7 +44,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::wyTQ3s4zkLwZUMmN',
+            '_route' => 'generated::XGbFfftYytFwbANS',
           ),
           1 => NULL,
           2 => 
@@ -122,7 +122,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::jOkmZGxPzgsNHZHR',
+            '_route' => 'generated::90Y44ZxU5DP8HJCK',
           ),
           1 => NULL,
           2 => 
@@ -142,7 +142,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::9UCJCXiP7GRXy16T',
+            '_route' => 'generated::n1W35qn4FGc3BorW',
           ),
           1 => NULL,
           2 => 
@@ -320,7 +320,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'admin.generated::2JVYFiQbdDwP3Nph',
+            '_route' => 'admin.generated::lR34LqNXHrvYJ4vq',
           ),
           1 => NULL,
           2 => 
@@ -360,7 +360,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'admin.generated::3nGbyLwrxxC18n3o',
+            '_route' => 'admin.generated::GRtvItz9GQknfVRk',
           ),
           1 => NULL,
           2 => 
@@ -400,7 +400,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'admin.generated::MdQYH4allMtCExQP',
+            '_route' => 'admin.generated::ke6MGjZQVa5ln5a9',
           ),
           1 => NULL,
           2 => 
@@ -485,6 +485,45 @@ app('router')->setCompiledRoutes(
           array (
             'GET' => 0,
             'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/admin/lockUpdate' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'admin.lock.update',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/admin/unlock' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'admin.unlock',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'POST' => 0,
           ),
           3 => NULL,
           4 => false,
@@ -1079,7 +1118,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::wyTQ3s4zkLwZUMmN' => 
+    'generated::XGbFfftYytFwbANS' => 
     array (
       'methods' => 
       array (
@@ -1091,7 +1130,7 @@ app('router')->setCompiledRoutes(
       array (
         'uses' => '\\Illuminate\\Routing\\ViewController@__invoke',
         'controller' => '\\Illuminate\\Routing\\ViewController',
-        'as' => 'generated::wyTQ3s4zkLwZUMmN',
+        'as' => 'generated::XGbFfftYytFwbANS',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1224,7 +1263,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::jOkmZGxPzgsNHZHR' => 
+    'generated::90Y44ZxU5DP8HJCK' => 
     array (
       'methods' => 
       array (
@@ -1241,13 +1280,13 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'O:47:"Laravel\\SerializableClosure\\SerializableClosure":1:{s:12:"serializable";O:46:"Laravel\\SerializableClosure\\Serializers\\Signed":2:{s:12:"serializable";s:295:"O:46:"Laravel\\SerializableClosure\\Serializers\\Native":5:{s:3:"use";a:0:{}s:8:"function";s:77:"function (\\Illuminate\\Http\\Request $request) {
     return $request->user();
-}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"00000000000006370000000000000000";}";s:4:"hash";s:44:"u2Rdwr1gHd5X51Ib3OfFDyjaCXoTYE4tu6SAAWlVZWU=";}}',
+}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"000000000000063b0000000000000000";}";s:4:"hash";s:44:"TNm//uK0xpJwCaHr1utPCEhTlkXFRALSaFvMaRxFe7c=";}}',
         'namespace' => NULL,
         'prefix' => 'api',
         'where' => 
         array (
         ),
-        'as' => 'generated::jOkmZGxPzgsNHZHR',
+        'as' => 'generated::90Y44ZxU5DP8HJCK',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1263,7 +1302,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::9UCJCXiP7GRXy16T' => 
+    'generated::n1W35qn4FGc3BorW' => 
     array (
       'methods' => 
       array (
@@ -1289,13 +1328,13 @@ app('router')->setCompiledRoutes(
     return \\response()->json([
         \'message\' => \'All cache removed successfully.\'
     ]);
-}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"00000000000006390000000000000000";}";s:4:"hash";s:44:"TJCoK+QqLEKsSnJQdfoZcpbGfudQ0Za7Gj7Mn1hYlKI=";}}',
+}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"000000000000063d0000000000000000";}";s:4:"hash";s:44:"DJXA81U1zjPD2yzshj9+srKym9wG9aU9PBiNJCmuriQ=";}}',
         'namespace' => NULL,
         'prefix' => '',
         'where' => 
         array (
         ),
-        'as' => 'generated::9UCJCXiP7GRXy16T',
+        'as' => 'generated::n1W35qn4FGc3BorW',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1612,7 +1651,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'admin.generated::2JVYFiQbdDwP3Nph' => 
+    'admin.generated::lR34LqNXHrvYJ4vq' => 
     array (
       'methods' => 
       array (
@@ -1629,7 +1668,7 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'App\\Http\\Controllers\\AuthController@loginWithFacebook',
         'controller' => 'App\\Http\\Controllers\\AuthController@loginWithFacebook',
-        'as' => 'admin.generated::2JVYFiQbdDwP3Nph',
+        'as' => 'admin.generated::lR34LqNXHrvYJ4vq',
         'namespace' => 'Admin',
         'prefix' => '/admin',
         'where' => 
@@ -1688,7 +1727,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'admin.generated::3nGbyLwrxxC18n3o' => 
+    'admin.generated::GRtvItz9GQknfVRk' => 
     array (
       'methods' => 
       array (
@@ -1705,7 +1744,7 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'App\\Http\\Controllers\\AuthController@loginWithGithub',
         'controller' => 'App\\Http\\Controllers\\AuthController@loginWithGithub',
-        'as' => 'admin.generated::3nGbyLwrxxC18n3o',
+        'as' => 'admin.generated::GRtvItz9GQknfVRk',
         'namespace' => 'Admin',
         'prefix' => '/admin',
         'where' => 
@@ -1764,7 +1803,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'admin.generated::MdQYH4allMtCExQP' => 
+    'admin.generated::ke6MGjZQVa5ln5a9' => 
     array (
       'methods' => 
       array (
@@ -1781,7 +1820,7 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'App\\Http\\Controllers\\AuthController@loginWithLinkedin',
         'controller' => 'App\\Http\\Controllers\\AuthController@loginWithLinkedin',
-        'as' => 'admin.generated::MdQYH4allMtCExQP',
+        'as' => 'admin.generated::ke6MGjZQVa5ln5a9',
         'namespace' => 'Admin',
         'prefix' => '/admin',
         'where' => 
@@ -1966,14 +2005,87 @@ app('router')->setCompiledRoutes(
         array (
           0 => 'web',
         ),
-        'uses' => 'App\\Http\\Controllers\\AuthController@lockscreen',
-        'controller' => 'App\\Http\\Controllers\\AuthController@lockscreen',
+        'uses' => 'App\\Http\\Controllers\\Backend\\lockScreenController@lockscreen',
+        'controller' => 'App\\Http\\Controllers\\Backend\\lockScreenController@lockscreen',
         'namespace' => NULL,
         'prefix' => '',
         'where' => 
         array (
         ),
         'as' => 'admin.lock',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'admin.lock.update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'admin/lockUpdate',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'App\\Http\\Controllers\\Backend\\lockScreenController@lockUpdate',
+        'controller' => 'App\\Http\\Controllers\\Backend\\lockScreenController@lockUpdate',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'admin.lock.update',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'admin.unlock' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'admin/unlock',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'App\\Http\\Controllers\\Backend\\lockScreenController@unlockscreen',
+        'controller' => 'App\\Http\\Controllers\\Backend\\lockScreenController@unlockscreen',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'admin.unlock',
       ),
       'fallback' => false,
       'defaults' => 

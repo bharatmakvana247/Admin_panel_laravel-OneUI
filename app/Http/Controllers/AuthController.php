@@ -12,8 +12,6 @@ use Illuminate\Support\Facades\Validator;
 use Storage;
 use Laravel\Socialite\Facades\Socialite;
 
-use function GuzzleHttp\Promise\all;
-
 class AuthController extends Controller
 {
 
@@ -35,17 +33,13 @@ class AuthController extends Controller
      */
     public function index()
     {
+        // if (Auth::check()) {
+        //     return redirect()->route('admin.dashboard');
+        // } else {
         return view('backend.pages.auth.login');
+        // }
     }
 
-    public function lockscreen()
-    {
-        if (Auth::user()->screen_lock == 'on') {
-            return view('backend.pages.dashboard.lockscreen');
-        } else {
-            return redirect()->route('admin.dashboard');
-        }
-    }
     /**
      * Show the form for creating a new resource.
      *
@@ -58,34 +52,36 @@ class AuthController extends Controller
             'email.required' => 'Please Enter Email.',
             'password.required' => 'Please Enter Password.',
         ];
-        Validator::make($request->all(), [
+        $validatedData = Validator::make($request->all(), [
             'email' => 'required',
-            'password' => 'required|confirmed|min:6',
+            'password' => 'required|min:6',
         ], $customMessages);
+        if ($validatedData->fails()) {
+            return redirect()->back()->withErrors($validatedData)->withInput();
+        }
 
         $remember_me = $request->has('remember_me') ? true : false;
 
         if (auth()->attempt(['email' => $request->input('email'), 'password' => $request->input('password')], $remember_me)) {
-            if (!empty($request->has('remember_me'))) {
-                $email_cookie = $request->email;
-                $password_cookie = $request->password;
-                setcookie("email_cookie", $email_cookie, time() + 3600, '/');
-                setcookie("password_cookie", $password_cookie, time() + 3600, '/');
-            } else {
-                if (isset($_COOKIE['email_cookie'])) {
-                    setcookie("email_cookie", "", time() + 3600, '/');
-                }
-                if (isset($_COOKIE['password_cookie'])) {
-                    setcookie("password_cookie", "", time() + 3600, '/');
-                }
-            }
+            // if (!empty($request->has('remember_me'))) {
+            //     $email_cookie = $request->email;
+            //     $password_cookie = $request->password;
+            //     setcookie("email_cookie", $email_cookie, time() + 3600, '/');
+            //     setcookie("password_cookie", $password_cookie, time() + 3600, '/');
+            // } else {
+            //     if (isset($_COOKIE['email_cookie'])) {
+            //         setcookie("email_cookie", "", time() + 3600, '/');
+            //     }
+            //     if (isset($_COOKIE['password_cookie'])) {
+            //         setcookie("password_cookie", "", time() + 3600, '/');
+            //     }
+            // }
             $credentials = $request->only('email', 'password');
             if (Auth::attempt($credentials)) {
                 smilify('success', 'Welcome to Admin Panel. ⚡️');
                 return redirect()->route('admin.dashboard');
             }
         }
-
         smilify('error', 'Login details are not valid');
         return redirect()->route('admin.login');
     }

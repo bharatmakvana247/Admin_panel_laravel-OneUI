@@ -1,5 +1,4 @@
-@extends('backend.layouts.authMaster')
-@section('authContent')
+<?php $__env->startSection('authContent'); ?>
     <div class="bg-image" style="background-image: url('assets/media/photos/photo14@2x.jpg');">
         <div class="hero-static d-flex align-items-center bg-primary-dark-op">
             <div class="content">
@@ -9,7 +8,7 @@
                             <div class="block-header block-header-default">
                                 <h3 class="block-title">Account Locked</h3>
                                 <div class="block-options">
-                                    <a class="btn-block-option" href="{{ route('admin.login') }}" data-bs-toggle="tooltip"
+                                    <a class="btn-block-option" href="<?php echo e(route('admin.login')); ?>" data-bs-toggle="tooltip"
                                         data-bs-placement="left" title="Sign In with another account">
                                         <i class="fa fa-sign-in-alt"></i>
                                     </a>
@@ -17,20 +16,22 @@
                             </div>
                             <div class="block-content">
                                 <div class="p-sm-3 px-lg-4 px-xxl-5 py-lg-5 text-center">
-                                    <img class="img-avatar img-avatar96" src="{!! \Auth::user()->image !== '' ? url('storage/userImage/' . \Auth::user()->image) : url('storage/default.png') !!}" alt="">
+                                    <img class="img-avatar img-avatar96" src="<?php echo \Auth::user()->image !== '' ? url('storage/userImage/' . \Auth::user()->image) : url('storage/default.png'); ?>" alt="">
                                     <p class="fw-semibold my-2">
-                                        {{ Auth::user()->email }}
+                                        <?php echo e(Auth::user()->email); ?>
+
                                     </p>
-                                    <form class="js-validation-lock mt-4" action="{{ route('admin.unlock') }}"
+                                    <form class="js-validation-lock mt-4" action="<?php echo e(route('admin.unlock')); ?>"
                                         method="POST">
-                                        @csrf
+                                        <?php echo csrf_field(); ?>
                                         <div class="mb-4">
                                             <input type="password" class="form-control form-control-lg form-control-alt"
                                                 id="lock-password" name="lock_password" placeholder="Password..">
-                                            @if ($errors->has('lock_password'))
-                                                <div class="text-danger">{{ $errors->first('lock_password') }}
+                                            <?php if($errors->has('lock_password')): ?>
+                                                <div class="text-danger"><?php echo e($errors->first('lock_password')); ?>
+
                                                 </div>
-                                            @endif
+                                            <?php endif; ?>
                                         </div>
 
                                         <div class="row justify-content-center mb-4">
@@ -52,8 +53,10 @@
             </div>
         </div>
     </div>
-@endsection
-@section('styles')
-@endsection
-@section('scripts')
-@endsection
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('styles'); ?>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('scripts'); ?>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('backend.layouts.authMaster', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\LaravelPanel\resources\views/backend/pages/dashboard/lockscreen.blade.php ENDPATH**/ ?>

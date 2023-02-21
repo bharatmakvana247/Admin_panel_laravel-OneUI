@@ -27,23 +27,23 @@
             <div class="dropdown d-inline-block ms-2">
                 <button type="button" class="btn btn-sm btn-alt-secondary d-flex align-items-center"
                     id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img class="rounded-circle" src="{!! \Auth::user()->image !== '' ? url('storage/userImage/' . \Auth::user()->image) : url('storage/default.png') !!}" alt="Image" style="width: 21px;">
-                    <span class="d-none d-sm-inline-block ms-2">{{ Auth::user()->name }}</span>
+                    <img class="rounded-circle" src="<?php echo \Auth::user()->image !== '' ? url('storage/userImage/' . \Auth::user()->image) : url('storage/default.png'); ?>" alt="Image" style="width: 21px;">
+                    <span class="d-none d-sm-inline-block ms-2"><?php echo e(Auth::user()->name); ?></span>
                     <i class="fa fa-fw fa-angle-down d-none d-sm-inline-block opacity-50 ms-1 mt-1"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-md dropdown-menu-end p-0 border-0"
                     aria-labelledby="page-header-user-dropdown">
                     <div class="p-3 text-center bg-body-light border-bottom rounded-top">
-                        {{-- <img class="img-avatar img-avatar48 img-avatar-thumb" src="" alt=""> --}}
-                        <img class="img-avatar img-avatar48 img-avatar-thumb" src="{!! \Auth::user()->image !== '' ? url('storage/userImage/' . \Auth::user()->image) : url('storage/default.png') !!}"
+                        
+                        <img class="img-avatar img-avatar48 img-avatar-thumb" src="<?php echo \Auth::user()->image !== '' ? url('storage/userImage/' . \Auth::user()->image) : url('storage/default.png'); ?>"
                             alt="Image">
 
-                        <p class="mt-2 mb-0 fw-medium">{{ Auth::user()->name }}</p>
+                        <p class="mt-2 mb-0 fw-medium"><?php echo e(Auth::user()->name); ?></p>
                         <p class="mb-0 text-muted fs-sm fw-medium">Web Developer</p>
                     </div>
                     <div class="p-2">
                         <a class="dropdown-item d-flex align-items-center justify-content-between"
-                            href="{{ route('admin.profile.edit') }}">
+                            href="<?php echo e(route('admin.profile.edit')); ?>">
                             <span class="fs-sm fw-medium">Profile</span>
                         </a>
                         <a class="dropdown-item d-flex align-items-center justify-content-between"
@@ -54,11 +54,11 @@
                     <div role="separator" class="dropdown-divider m-0"></div>
                     <div class="p-2">
                         <a class="dropdown-item d-flex align-items-center justify-content-between"
-                            href="{{ route('admin.lock.update') }}" id="lock">
+                            href="<?php echo e(route('admin.lock.update')); ?>" id="lock">
                             <span class="fs-sm fw-medium">Lock Account</span>
                         </a>
                         <a class="dropdown-item d-flex align-items-center justify-content-between"
-                            href="{{ route('admin.logout') }}">
+                            href="<?php echo e(route('admin.logout')); ?>">
                             <span class="fs-sm fw-medium">Log Out</span>
                         </a>
                     </div>
@@ -175,3 +175,4 @@
         </div>
     </div>
 </header>
+<?php /**PATH D:\LaravelPanel\resources\views/backend/theme/navbar.blade.php ENDPATH**/ ?>
