@@ -1,4 +1,7 @@
 @extends('backend.layouts.master')
+@section('title')
+    {{ $form_title }}
+@endsection
 @section('content')
     <div class="bg-body-light">
         <div class="content content-full">

@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('social_id')->nullable();
             $table->string('social_media')->nullable();
             $table->string('signup_terms')->nullable();
+            $table->enum('screen_lock', ['off', 'on'])->default('off');
             $table->timestamps();
             $table->softDeletes();
         });

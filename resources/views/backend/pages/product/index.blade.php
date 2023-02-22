@@ -1,4 +1,7 @@
 @extends('backend.layouts.master')
+@section('title')
+    {{ $form_title }}
+@endsection
 @section('content')
     <div class="content">
         <div class="block block-rounded">

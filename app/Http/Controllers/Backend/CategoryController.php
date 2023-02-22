@@ -15,7 +15,7 @@ class CategoryController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('isAdmin');
+        $this->middleware('auth');
     }
 
     public function create()
@@ -27,6 +27,7 @@ class CategoryController extends Controller
 
     public function index(Request $request)
     {
+        $form_title = "Category";
         if ($request->ajax()) {
             $categories = Category::with('brand')->orderBy('category_id', 'desc');
             return DataTables::of($categories)->addIndexColumn()
@@ -47,7 +48,7 @@ class CategoryController extends Controller
                 })
                 ->make(true);
         }
-        return view('backend.pages.category.index');
+        return view('backend.pages.category.index', compact('form_title'));
     }
 
     public function store(Request $request)

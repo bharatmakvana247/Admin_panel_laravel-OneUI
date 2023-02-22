@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Validator;
 
 class lockScreenController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function lockscreen()
     {
         if (Auth::user()->screen_lock == 'on') {

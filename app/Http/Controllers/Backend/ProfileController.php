@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function editProfile()
     {
         $form_title = "Profile";
@@ -24,20 +28,19 @@ class ProfileController extends Controller
         $customMessages = [
             'username.required' => 'Please Enter Username.',
             'email.required' => 'Please Enter Email.',
-            'image.required' => 'Please Enter Image.',
+            // 'image.required' => 'Please Enter Image.',
         ];
         $validatedData = Validator::make($request->all(), [
             'username' => 'required',
             'email' => 'required|unique:users,email,' . $request->id,
-            'image' => 'required'
+            // 'image' => 'required'
         ], $customMessages);
 
         if ($validatedData->fails()) {
             return redirect()->back()->withErrors($validatedData)->withInput();
         }
-        // dd($request->all());
         try {
-            $oldDetails = User::where('id', $id)->get();
+            $oldDetails = User::where('id', $id)->first();
             if ($request->hasFile('image')) {
                 $file = $request->file('image');
                 $filename = $file->getClientOriginalName();
@@ -49,6 +52,7 @@ class ProfileController extends Controller
                 } else {
                     //Empty image file select then
                     $filename = 'default.png';
+                    // dd($request->all());
                     // $filename = $oldDetails->image;
                 }
             }
@@ -60,7 +64,7 @@ class ProfileController extends Controller
             smilify('success', 'User Updated Successfully. ⚡️');
             return redirect()->route('admin.dashboard');
         } catch (Exception $e) {
-            dd($e);
+            dd("error::" . $e);
             smilify('error', 'Sorry User was not Updated.');
             return redirect()->back();
         }

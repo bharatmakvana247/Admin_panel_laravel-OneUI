@@ -1,4 +1,7 @@
 @extends('backend.layouts.master')
+@section('title')
+    {{ Auth::user()->name }} Profile
+@endsection
 @section('content')
     <div class="bg-image" style="background-image: url('{{ asset('assets/admin/media/photos/photo10@2x.jpg') }}');">
         <div class="bg-primary-dark-op">

@@ -1,4 +1,7 @@
 @extends('backend.layouts.master')
+@section('title')
+    {{ $form_title }}
+@endsection
 @section('content')
     <div class="bg-image overflow-hidden"
         style="background-image: url('{{ asset('assets/admin/media/photos/photo3@2x.jpg') }}');">
@@ -14,11 +17,18 @@
             </div>
         </div>
     </div>
-
     <div class="content">
         <div class="row items-push">
-
             <div class="row">
+                <div class="col-6 col-md-3 col-lg-6 col-xl-3">
+                    <a class="block block-rounded block-link-pop border-start border-primary border-4"
+                        href="javascript:void(0)">
+                        <div class="block-content block-content-full">
+                            <div class="fs-sm fw-semibold text-uppercase text-muted">Users</div>
+                            <div class="fs-2 fw-normal text-dark">{{ $user_count }}</div>
+                        </div>
+                    </a>
+                </div>
                 <div class="col-6 col-md-3 col-lg-6 col-xl-3">
                     <a class="block block-rounded block-link-pop border-start border-primary border-4"
                         href="{{ route('admin.product.index') }}">
@@ -45,15 +55,6 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-6 col-md-3 col-lg-6 col-xl-3">
-                    <a class="block block-rounded block-link-pop border-start border-primary border-4"
-                        href="javascript:void(0)">
-                        <div class="block-content block-content-full">
-                            <div class="fs-sm fw-semibold text-uppercase text-muted">Users</div>
-                            <div class="fs-2 fw-normal text-dark">{{ $user_count }}</div>
-                        </div>
-                    </a>
-                </div>
             </div>
         </div>
     </div>
@@ -61,16 +62,4 @@
 @section('styles')
 @endsection
 @section('scripts')
-    <script>
-        $(document).ready(function() {
-            $('#lock').on('click', function(e) {
-                $.ajax({
-                    route: 'admin.lock.update',
-                    method: 'post'
-                }).then(function() {
-                    alert('success');
-                });
-            });
-        });
-    </script>
 @endsection

@@ -7,17 +7,19 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use Exception, Str;
+use File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Filesystem\FilesystemAdapter;
+use Illuminate\Support\Facades\File as FacadesFile;
 
 class ProductController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('isAdmin');
+        $this->middleware('auth');
     }
 
     public function create()
@@ -30,7 +32,7 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {
-
+        $form_title = "Product";
         if ($request->ajax()) {
             $products = Product::orderBy('product_id', 'desc');
             return DataTables::of($products)->addIndexColumn()
@@ -54,9 +56,9 @@ class ProductController extends Controller
                 })
                 ->addColumn('productimage', function (Product $products) {
                     if (!empty($products->product_image)) {
-                        return '<img src=' . url("storage/productImage/$products->product_image") . '  width="80%" height="50%" class="img-rounded" align="center" />';
+                        return '<img src=' . url("storage/productImage/$products->product_image") . '   width="50%" height="50%" class="img-rounded" align="center" />';
                     } else {
-                        return '<img src=' . url("storage/productImage/default.png") . '  width="70%" height="40%" class="img-rounded" align="center" />';
+                        return '<img src=' . url("storage/productImage/default.png") . '  width="50%" height="50%" class="img-rounded" align="center" />';
                     }
                 })
                 ->addColumn('action', function (Product $product) {
@@ -69,7 +71,7 @@ class ProductController extends Controller
                 ->rawColumns(['action', 'category_id', 'brand_id', 'productimage', 'productDetails'])
                 ->make(true);
         }
-        return view('backend.pages.product.index');
+        return view('backend.pages.product.index', compact('form_title'));
     }
 
     public function store(Request $request)
@@ -87,7 +89,7 @@ class ProductController extends Controller
             'product_price' => 'required',
             'product_qty' => 'required',
             'product_image' => 'required',
-            'brand_name' => 'required',
+            'brand_id' => 'required',
             'category_name'  => 'required'
         ], $customMessages);
         if ($validatedData->fails()) {
@@ -146,12 +148,14 @@ class ProductController extends Controller
             'product_price' => 'required',
             'product_qty' => 'required',
             // 'product_image' => 'required',
-            'brand_name' => 'required',
+            'brand_id' => 'required',
             'category_name'  => 'required'
         ], $customMessages);
         if ($validatedData->fails()) {
             return redirect()->back()->withErrors($validatedData)->withInput();
         }
+        // dd($request->all());
+
 
         try {
             $oldDetails = Product::where('product_id', $id)->first();
@@ -170,7 +174,7 @@ class ProductController extends Controller
             Product::where('product_id', $id)->update([
                 'product_name' => $request->get('product_name'),
                 'category_name' => $request->get('category_name'),
-                'brand_id' => $request->get('brand_name'),
+                'brand_id' => $request->get('brand_id'),
                 'product_details' => $request->get('product_details'),
                 'product_price' => $request->get('product_price'),
                 'product_qty' => $request->get('product_qty'),
@@ -179,6 +183,7 @@ class ProductController extends Controller
             smilify('success', 'Product Updated. ⚡️');
             return redirect()->route('admin.product.index');
         } catch (Exception $e) {
+            dd($e);
             smilify('error', 'Sorry Product was not Updated.');
             return redirect()->back();
         }
@@ -187,6 +192,13 @@ class ProductController extends Controller
     function delete($id)
     {
         $product_dlt = Product::where('product_id', $id)->first();
+        // $dlt =   FacadesFile::delete(asset('storage/productImage' . $product_dlt->product_image));
+
+        $data = Product::find($id);
+        $image_path = public_path() . '/storage/productImage/' . $data->product_image;
+        unlink($image_path);
+        $data->delete();
+
         $product_dlt->delete();
         smilify('success', 'Product Deleted. ⚡️');
         return redirect()->route('admin.product.index');

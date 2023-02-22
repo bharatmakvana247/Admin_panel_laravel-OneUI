@@ -1,13 +1,13 @@
-@extends('backend.layouts.master')
-@section('title')
-    {{ $form_title }}
-@endsection
-@section('content')
+<?php $__env->startSection('title'); ?>
+    <?php echo e($form_title); ?>
+
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
     <div class="content">
         <div class="block block-rounded">
             <div class="block-header block-header-default">
                 <h3 class="block-title">Category Table</h3>
-                <a href="{{ route('admin.category.create') }}" class="btn btn-sm btn-primary"> <i
+                <a href="<?php echo e(route('admin.category.create')); ?>" class="btn btn-sm btn-primary"> <i
                         class="fa fa-fw fa-plus me-1"></i> Add
                     Category</a>
             </div>
@@ -29,10 +29,10 @@
             </div>
         </div>
     </div>
-@endsection
-@section('styles')
-@endsection
-@section('scripts')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('styles'); ?>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('scripts'); ?>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js"></script>
@@ -124,7 +124,7 @@
                 pageLength: 5,
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('admin.category.index') }}",
+                ajax: "<?php echo e(route('admin.category.index')); ?>",
                 dom: 'Blfrtip',
                 columns: columns,
                 buttons: buttons
@@ -132,7 +132,7 @@
 
         });
     </script>
-    @include('backend.theme.deleteSweelAlert')
+    <?php echo $__env->make('backend.theme.deleteSweelAlert', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <script>
         $(document).ready(function() {
             $(document).on("click", "a.Showcategories", function(e) {
@@ -143,7 +143,7 @@
                 console.log("Id", id);
                 // Make a request for a user with a given ID
                 $.ajax({
-                    url: "{{ route('admin.category.show') }}",
+                    url: "<?php echo e(route('admin.category.show')); ?>",
                     type: 'get',
                     data: {
                         id: id
@@ -159,4 +159,6 @@
             });
         });
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('backend.layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\LaravelPanel\resources\views/backend/pages/category/index.blade.php ENDPATH**/ ?>

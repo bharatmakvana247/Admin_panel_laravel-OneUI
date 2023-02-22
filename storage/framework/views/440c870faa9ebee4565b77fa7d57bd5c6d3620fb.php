@@ -1,14 +1,14 @@
-@extends('backend.layouts.master')
-@section('title')
-    {{ $form_title }}
-@endsection
-@section('content')
+<?php $__env->startSection('title'); ?>
+    <?php echo e($form_title); ?>
+
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
     <div class="bg-body-light">
         <div class="content content-full">
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center py-2">
                 <div class="flex-grow-1">
                     <h1 class="h3 fw-bold mb-2">
-                        {{ $form_title }} Element
+                        <?php echo e($form_title); ?> Element
                     </h1>
                 </div>
                 <nav class="flex-shrink-0 mt-3 mt-sm-0 ms-sm-3" aria-label="breadcrumb">
@@ -17,7 +17,8 @@
                             <a class="link-fx" href="javascript:void(0)">Forms</a>
                         </li>
                         <li class="breadcrumb-item" aria-current="page">
-                            {{ $form_title }}
+                            <?php echo e($form_title); ?>
+
                         </li>
                     </ol>
                 </nav>
@@ -27,25 +28,28 @@
     <div class="content">
         <div class="block block-rounded">
             <div class="block-header block-header-default">
-                <h3 class="block-title"> Add-{{ $form_title }}
+                <h3 class="block-title"> Add-<?php echo e($form_title); ?>
+
                 </h3>
             </div>
             <div class="block-content block-content-full">
-                {!! Form::open([
-                    'route' => ['admin.brand.store'],
+                <?php echo Form::open([
+                    'route' => ['admin.product.store'],
                     'id' => 'CreateForm',
                     'files' => 'true',
                     'enctype' => 'multipart/form-data',
-                    'method' => 'POST',
-                ]) !!}
-                @csrf
-                @include('backend.pages.brand.form')
-                {!! Form::close() !!}
+                ]); ?>
+
+                <?php echo $__env->make('backend.pages.product.form', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                <?php echo Form::close(); ?>
+
             </div>
         </div>
     </div>
-@endsection
-@section('styles')
-@endsection
-@section('scripts')
-@endsection
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('styles'); ?>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('scripts'); ?>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('backend.layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\LaravelPanel\resources\views/backend/pages/product/create.blade.php ENDPATH**/ ?>

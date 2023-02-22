@@ -1,25 +1,27 @@
-@extends('backend.layouts.master')
-@section('title')
-    {{ $form_title }}
-@endsection
-@section('content')
+<?php $__env->startSection('title'); ?>
+    <?php echo e($form_title); ?>
+
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
     <div class="content">
         <div class="block block-rounded">
             <div class="block-header block-header-default">
-                <h3 class="block-title">Category Table</h3>
-                <a href="{{ route('admin.category.create') }}" class="btn btn-sm btn-primary"> <i
+                <h3 class="block-title">Product Table</h3>
+                <a href="<?php echo e(route('admin.product.create')); ?>" class="btn btn-sm btn-primary"> <i
                         class="fa fa-fw fa-plus me-1"></i> Add
-                    Category</a>
+                    Product</a>
             </div>
-
-
             <div class="block-content block-content-full">
                 <table class="table table-striped table-bordered dt-responsive" id="quiztable">
                     <thead>
                         <tr>
                             <th class="text-center" style="width: 80px;">ID</th>
-                            <th class="d-none d-sm-table-cell">Brand</th>
+                            <th class="d-none d-sm-table-cell">Product Name</th>
+                            <th class="d-none d-sm-table-cell">Product Details</th>
                             <th class="d-none d-sm-table-cell">Category</th>
+                            <th class="d-none d-sm-table-cell">brand</th>
+                            <th class="d-none d-sm-table-cell">Product Price</th>
+                            <th class="d-none d-sm-table-cell">Product Image</th>
                             <th class="d-none d-sm-table-cell notexport">Action</th>
                         </tr>
                     </thead>
@@ -29,11 +31,10 @@
             </div>
         </div>
     </div>
-@endsection
-@section('styles')
-@endsection
-@section('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('styles'); ?>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('scripts'); ?>
     <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js"></script>
     <script src="//cdn.datatables.net/buttons/1.3.1/js/buttons.flash.min.js"></script>
@@ -51,12 +52,28 @@
                     searchable: false
                 },
                 {
+                    data: 'product_name',
+                    name: 'product_name'
+                },
+                {
+                    data: 'productDetails',
+                    name: 'productDetails'
+                },
+                {
+                    data: 'category_id',
+                    name: 'category_id'
+                },
+                {
                     data: 'brand_id',
                     name: 'brand_id'
                 },
                 {
-                    data: 'category_name',
-                    name: 'category_name'
+                    data: 'product_price',
+                    name: 'product_price'
+                },
+                {
+                    data: 'productimage',
+                    name: 'productimage'
                 },
                 {
                     data: 'action',
@@ -70,7 +87,7 @@
                     extend: 'copy',
                     text: '<i class="fa fa-print"></i> Copy',
                     exportOptions: {
-                        columns: [0, 1, 2] // Column index which needs to export
+                        columns: [0, 1, 2, 3, 4, 5] // Column index which needs to export
                     }
                 },
                 {
@@ -78,7 +95,7 @@
                     extend: 'excel',
                     text: '<i class="fa fa-print"></i> Excel',
                     exportOptions: {
-                        columns: [0, 1, 2] // Column index which needs to export
+                        columns: [0, 1, 2, 3, 4, 5] // Column index which needs to export
                     }
                 },
                 {
@@ -86,7 +103,7 @@
                     extend: 'csv',
                     text: '<i class="fa fa-print"></i> CSV',
                     exportOptions: {
-                        columns: [0, 1, 2] // Column index which needs to export
+                        columns: [0, 1, 2, 3, 4, 5] // Column index which needs to export
                     }
                 },
                 {
@@ -94,7 +111,7 @@
                     extend: 'pdf',
                     text: '<i class="fa fa-print"></i> Pdf',
                     exportOptions: {
-                        columns: [0, 1, 2] // Column index which needs to export
+                        columns: [0, 1, 2, 3, 4, 5] // Column index which needs to export
                     }
                 },
                 {
@@ -112,7 +129,7 @@
                             .css('font-size', 'inherit');
                     },
                     exportOptions: {
-                        columns: [0, 1, 2] // Column index which needs to export
+                        columns: [0, 1, 2, 3, 4, 5] // Column index which needs to export
                     }
                 }
             ];
@@ -124,7 +141,7 @@
                 pageLength: 5,
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('admin.category.index') }}",
+                ajax: "<?php echo e(route('admin.product.index')); ?>",
                 dom: 'Blfrtip',
                 columns: columns,
                 buttons: buttons
@@ -132,31 +149,7 @@
 
         });
     </script>
-    @include('backend.theme.deleteSweelAlert')
-    <script>
-        $(document).ready(function() {
-            $(document).on("click", "a.Showcategories", function(e) {
-                var row = $(this);
-                console.log("row", row);
-                var id = $(this).attr('data-id');
+    <?php echo $__env->make('backend.theme.deleteSweelAlert', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php $__env->stopSection(); ?>
 
-                console.log("Id", id);
-                // Make a request for a user with a given ID
-                $.ajax({
-                    url: "{{ route('admin.category.show') }}",
-                    type: 'get',
-                    data: {
-                        id: id
-                    },
-                    success: function(msg) {
-                        $('.testdata').html(msg);
-                        $('#basicModal').modal('show');
-                    },
-                    error: function() {
-                        swal("Error!", 'Error in Record Not Show', "error");
-                    }
-                });
-            });
-        });
-    </script>
-@endsection
+<?php echo $__env->make('backend.layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\LaravelPanel\resources\views/backend/pages/product/index.blade.php ENDPATH**/ ?>
